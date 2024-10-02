@@ -6,10 +6,6 @@
     <groupId>com.testingauto</groupId>
     <artifactId>Website-Framework</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>Website</module>
-    </modules>
     <build>
         <plugins>
             <plugin>
