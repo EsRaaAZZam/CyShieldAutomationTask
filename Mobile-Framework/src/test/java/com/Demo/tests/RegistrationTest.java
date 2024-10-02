@@ -1,6 +1,7 @@
 package com.Demo.tests;
 
 import com.Demo.driver.DriverSingleton;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -28,9 +29,17 @@ public class RegistrationTest extends BaseTest {
 
     @Test(priority = 1)
     public void checkAllElementsVisible() {
-       device.anaVodafone.registrationPage.checkAllElementsVisible();
-    }
 
+        Assert.assertTrue(device.registerApp.registrationPage.getUsernameInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getEmailInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getPasswordInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getUserIdInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getAddressInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getCountrySelect().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getZipCodeInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getSexInput().isDisplayed());
+        Assert.assertTrue(device.registerApp.registrationPage.getSubmitButton().isDisplayed());
+    }
 //    @Test(priority = 2)
 //    public void fillRegistrationFormWithInvalidData() {
 //

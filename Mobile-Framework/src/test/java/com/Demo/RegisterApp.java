@@ -5,20 +5,17 @@ import com.Demo.driver.DriverSingleton;
 import com.Demo.screens.RegistrationPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class AnaVodafone {
+public class RegisterApp {
 
     public RegistrationPage registrationPage;
 
-    public AnaVodafone(AppiumDriver<MobileElement> driver) {
+    public RegisterApp(AppiumDriver<MobileElement> driver) {
         registrationPage = new RegistrationPage(DriverSingleton.getDriverSingleton().getDriver());
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }

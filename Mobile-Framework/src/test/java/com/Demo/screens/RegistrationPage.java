@@ -2,13 +2,11 @@ package com.Demo.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.*;
 
 public class RegistrationPage extends BaseScreen {
+
+
     private final By usernameInput = By.name("username");
     private final By emailInput = By.name("email");
     private final By passwordInput = By.name("passid");
@@ -19,51 +17,92 @@ public class RegistrationPage extends BaseScreen {
     private final By sexInput = By.name("sex");
     private final By submitButton = By.xpath("//input[@type='submit']");
     private final By successMessage = By.id("success-message");
-    private final By errorMessage = By.id("error-message");
+    private final By errorMessage = By.id("error-message"); //
 
     public RegistrationPage(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
 
-    public void checkAllElementsVisible() {
-//        try {
-//            assertElementIsVisible(emailInput, "Email input is not visible");
-//            assertElementIsVisible(passwordInput, "Password input is not visible");
-//            assertElementIsVisible(userIdInput, "User ID input is not visible");
-//            assertElementIsVisible(addressInput, "Address input is not visible");
-//            assertElementIsVisible(countrySelect, "Country select is not visible");
-//            assertElementIsVisible(zipCodeInput, "Zip code input is not visible");
-//            assertElementIsVisible(sexInput, "Sex input is not visible");
-//            assertElementIsVisible(submitButton, "Submit button is not visible");
-//        } catch (Exception e) {
-//            System.out.println("An error occurred while checking visibility: " + e.getMessage());
-//        }
-
-        System.out.println("reached here" +
-                "");
+    public WebElement getCountrySelect() {
+        return driver.findElement(countrySelect);
     }
 
-    private void assertElementIsVisible(By locator, String errorMessage) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        if (!element.isDisplayed()) {
-            throw new AssertionError(errorMessage);
-        }
+    public WebElement getUsernameInput() {
+        return driver.findElement(usernameInput);
     }
 
-    public void fillRegistrationForm(String username, String email, String password, String userId, String address, String country, String zip, String sex) {
-
+    public WebElement getEmailInput() {
+        return driver.findElement(emailInput);
     }
 
-    public void submitForm() {
+    public WebElement getPasswordInput() {
+        return driver.findElement(passwordInput);
+    }
+
+    public WebElement getUserIdInput() {
+        return driver.findElement(userIdInput);
+    }
+
+    public WebElement getAddressInput() {
+        return driver.findElement(addressInput);
+    }
+
+    public WebElement getZipCodeInput() {
+        return driver.findElement(zipCodeInput);
+    }
+
+    public WebElement getSexInput() {
+        return driver.findElement(sexInput);
+    }
+
+    public WebElement getSubmitButton() {
+        return driver.findElement(submitButton);
+    }
+
+
+
+    public void enterFirstName(String name) {
+        driver.findElement(usernameInput).sendKeys(name);
+    }
+
+
+    public void enterEmail(String emailStr) {
+        driver.findElement(emailInput).sendKeys(emailStr);
+    }
+
+    public void enterPassword(String pwd) {
+        driver.findElement(passwordInput).sendKeys(pwd);
+    }
+
+    public void clickRegister() {
         driver.findElement(submitButton).click();
     }
 
-    public String getSuccessMessage() {
-        return driver.findElement(successMessage).getText();
+    public void fillRegistrationForm(String username, String email, String password, String userId, String address, String country, String zipCode, String sex) {
+        driver.  findElement(usernameInput).sendKeys(username);
+        driver. findElement(emailInput).sendKeys(email);
+        driver.findElement(passwordInput).sendKeys(password);
+        driver.findElement(userIdInput).sendKeys(userId);
+        driver.  findElement(addressInput).sendKeys(address);
+        WebElement countryDropdown = driver.findElement(countrySelect);
+        countryDropdown.sendKeys(country);
+        driver. findElement(zipCodeInput).sendKeys(zipCode);
+        driver. findElement(By.xpath("//input[@name='sex' and @value='" + sex + "']")).click();
     }
 
-    public String getErrorMessage() {
-        return driver.findElement(errorMessage).getText();
+
+
+
+    public String getErrorMessage(WebDriver driver) {
+        try {
+            Alert alert = driver.switchTo().alert();
+            String alertText = alert.getText();
+            System.out.println(" alert " + alert.getText() );
+            alert.accept();
+            return alertText; // Return the alert message
+        } catch (NoAlertPresentException e) {
+            return null; // No alert is present
+        }
     }
+
 }

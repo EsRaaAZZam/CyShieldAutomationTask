@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Ana Vodafone">
+<suite name="Register test">
 
-    <test name="red home">
+    <test name="registratin">
         <classes>
             <class name="com.Demo.tests.RegistrationTest"/>
         </classes>
