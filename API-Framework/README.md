@@ -16,7 +16,8 @@ This project is an automation framework for testing APIs using RestAssured, with
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd <repository-directory>
+   cd API-Framework/
+
 
 
 ## Running Tests
