@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Website-Framework (2)" />
         <module name="API-Framework" />
+        <module name="Website-Framework" />
+        <module name="Website-Framework (1)" />
         <module name="Mobile-Framework" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Website-Framework (1)" target="1.8" />
+      <module name="untitled" target="22" />
+      <module name="Website-Framework (2)" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
