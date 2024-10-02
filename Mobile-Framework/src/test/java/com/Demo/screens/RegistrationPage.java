@@ -60,7 +60,6 @@ public class RegistrationPage extends BaseScreen {
     }
 
 
-
     public void enterFirstName(String name) {
         driver.findElement(usernameInput).sendKeys(name);
     }
@@ -79,25 +78,22 @@ public class RegistrationPage extends BaseScreen {
     }
 
     public void fillRegistrationForm(String username, String email, String password, String userId, String address, String country, String zipCode, String sex) {
-        driver.  findElement(usernameInput).sendKeys(username);
-        driver. findElement(emailInput).sendKeys(email);
+        driver.findElement(usernameInput).sendKeys(username);
+        driver.findElement(emailInput).sendKeys(email);
         driver.findElement(passwordInput).sendKeys(password);
         driver.findElement(userIdInput).sendKeys(userId);
-        driver.  findElement(addressInput).sendKeys(address);
+        driver.findElement(addressInput).sendKeys(address);
         WebElement countryDropdown = driver.findElement(countrySelect);
         countryDropdown.sendKeys(country);
-        driver. findElement(zipCodeInput).sendKeys(zipCode);
-        driver. findElement(By.xpath("//input[@name='sex' and @value='" + sex + "']")).click();
+        driver.findElement(zipCodeInput).sendKeys(zipCode);
+        driver.findElement(By.xpath("//input[@name='sex' and @value='" + sex + "']")).click();
     }
-
-
-
 
     public String getErrorMessage(WebDriver driver) {
         try {
             Alert alert = driver.switchTo().alert();
             String alertText = alert.getText();
-            System.out.println(" alert " + alert.getText() );
+            System.out.println(" alert " + alert.getText());
             alert.accept();
             return alertText; // Return the alert message
         } catch (NoAlertPresentException e) {
