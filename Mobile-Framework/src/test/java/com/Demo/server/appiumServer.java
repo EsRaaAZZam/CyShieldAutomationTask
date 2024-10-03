@@ -15,6 +15,7 @@ public class appiumServer {
         builder.usingAnyFreePort();
 
         service = AppiumDriverLocalService.buildService(builder);
+        service.clearOutPutStreams();
         service.start();
         if (service == null || !service.isRunning()) {
             throw new RuntimeException("An appium server node is not started!");

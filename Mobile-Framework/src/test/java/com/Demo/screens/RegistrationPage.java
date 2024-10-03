@@ -2,61 +2,77 @@ package com.Demo.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 
+import java.time.Duration;
+
+
 public class RegistrationPage extends BaseScreen {
-
-
-    private final By usernameInput = By.name("username");
-    private final By emailInput = By.name("email");
-    private final By passwordInput = By.name("passid");
-    private final By userIdInput = By.name("userid");
-    private final By addressInput = By.name("address");
-    private final By countrySelect = By.name("country");
-    private final By zipCodeInput = By.name("zip");
-    private final By sexInput = By.name("sex");
+    private final By usernameInput = By.xpath("//input[@name='username']");
+    private final By emailInput = By.xpath("//input[@name='email']");
+    private final By passwordInput = By.xpath("//input[@name='passid']");
+    private final By userIdInput = By.xpath("//input[@name='userid']");
+    private final By addressInput = By.xpath("//input[@name='address']");
+    private final By countrySelect = By.xpath("//select[@name='country']");
+    private final By zipCodeInput = By.xpath("//input[@name='zip']");
+    private final By sexInput = By.xpath("//input[@name='sex']");
     private final By submitButton = By.xpath("//input[@type='submit']");
-    private final By successMessage = By.id("success-message");
-    private final By errorMessage = By.id("error-message"); //
+    private final By successMessage = By.xpath("//div[@id='success-message']");
+    private final By errorMessage = By.xpath("//div[@id='error-message']");
 
     public RegistrationPage(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
 
     public WebElement getCountrySelect() {
+        RegistrationPage.waitForElementToBeVisible(countrySelect);
         return driver.findElement(countrySelect);
     }
 
-    public WebElement getUsernameInput() {
+    public WebElement getUsernameInput() throws InterruptedException {
+        scrollUntilElementFound(usernameInput,5);
         return driver.findElement(usernameInput);
     }
 
     public WebElement getEmailInput() {
-        return driver.findElement(emailInput);
+        RegistrationPage.waitForElementToBeVisible(emailInput);
+
+        return  driver.findElement(emailInput);
     }
 
     public WebElement getPasswordInput() {
-        return driver.findElement(passwordInput);
+        RegistrationPage.waitForElementToBeVisible(passwordInput);
+
+        return  driver.findElement(passwordInput);
     }
 
     public WebElement getUserIdInput() {
-        return driver.findElement(userIdInput);
+        RegistrationPage.waitForElementToBeVisible(userIdInput);
+        return  driver.findElement(userIdInput);
     }
 
     public WebElement getAddressInput() {
-        return driver.findElement(addressInput);
+        RegistrationPage.waitForElementToBeVisible(addressInput);
+        return  driver.findElement(addressInput);
     }
 
     public WebElement getZipCodeInput() {
-        return driver.findElement(zipCodeInput);
+        RegistrationPage.waitForElementToBeVisible(zipCodeInput);
+        return  driver.findElement(zipCodeInput);
     }
 
     public WebElement getSexInput() {
-        return driver.findElement(sexInput);
+        RegistrationPage.waitForElementToBeVisible(sexInput);
+        return  driver.findElement(sexInput);
     }
 
     public WebElement getSubmitButton() {
-        return driver.findElement(submitButton);
+        RegistrationPage.waitForElementToBeVisible(submitButton);
+
+        return  driver.findElement(submitButton);
     }
 
 
@@ -89,7 +105,7 @@ public class RegistrationPage extends BaseScreen {
         driver.findElement(By.xpath("//input[@name='sex' and @value='" + sex + "']")).click();
     }
 
-    public String getErrorMessage(WebDriver driver) {
+    public String getErrorMessage(AppiumDriver<MobileElement> driver) {
         try {
             Alert alert = driver.switchTo().alert();
             String alertText = alert.getText();
@@ -100,5 +116,33 @@ public class RegistrationPage extends BaseScreen {
             return null; // No alert is present
         }
     }
+    public void scrollDown() {
+        TouchAction action = new TouchAction(driver);
+        action.press(PointOption.point(500, 1500))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(500, 500))
+                .release()
+                .perform();
+    }
 
+    public void scrollUntilElementFound(By locator, int maxAttempts) {
+        boolean found = false;
+        int attempts = 0;
+
+        while (!found && attempts < maxAttempts) {
+            try {
+                driver.findElement(locator);
+                found = true;
+            } catch (NoSuchElementException e) {
+                scrollDown();
+                attempts++;
+            } catch (StaleElementReferenceException e) {
+            }
+        }
+
+        if (!found) {
+            System.out.println("Element not found after " + maxAttempts + " attempts.");
+        }
+    }
 }
+
